@@ -7,7 +7,7 @@ import com.binwin.easyfood.model.response.MealResponse
 class MealsCategoryViewModel(
     private val repository: MealsRepository = MealsRepository()
 ): ViewModel() {
-    fun getMeals() : List<MealResponse>{
+    suspend fun getMeals() : List<MealResponse>{
         return repository.getMeals().categories
     }
 }
