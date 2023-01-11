@@ -14,5 +14,5 @@ data class MealResponse(
     @SerializedName("strCategoryThumb")
     val image: String,
     @SerializedName("strCategoryDescription")
-    val strCategoryDescription: String
+    val description: String
 )
