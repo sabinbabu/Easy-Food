@@ -12,25 +12,27 @@ import androidx.navigation.navArgument
 import com.binwin.easyfood.ui.theme.EasyFoodTheme
 import com.binwin.easyfood.ui.theme.MEALS_CATEGORY
 import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
+import com.binwin.easyfood.ui.theme.RECIPE_LIST
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             EasyFoodTheme {
-                UserApplication()
+                EasyFood()
             }
         }
     }
 }
 
 @Composable
-fun UserApplication() {
+fun EasyFood() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = MEALS_CATEGORY) {
         composable(MEALS_CATEGORY) {
             MealsCategoryScreen(navController)
         }
+
         composable(
             route = "$MEALS_SINGLE_CATEGORY{mealCategory}",
             arguments = listOf(navArgument("mealCategory") {
@@ -40,6 +42,16 @@ fun UserApplication() {
             MealsSingleCategoryScreen(
                 navBackStackEntry.arguments!!.getString("mealCategory"),
                 navController
+            )
+        }
+
+        composable(route="$RECIPE_LIST{mealName}", //use Id here
+        arguments = listOf(navArgument("mealName"){
+            type = NavType.StringType
+        })
+        ){navBackStackEntry ->
+            RecipeScreen(
+                navBackStackEntry.arguments!!.getString("mealName")!!
             )
         }
     }

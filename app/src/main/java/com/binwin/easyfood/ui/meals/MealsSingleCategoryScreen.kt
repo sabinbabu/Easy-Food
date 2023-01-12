@@ -1,6 +1,7 @@
 package com.binwin.easyfood.ui.meals
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -22,6 +23,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.binwin.easyfood.model.response.MealsSingleResponse
+import com.binwin.easyfood.ui.theme.RECIPE_LIST
 
 @Composable
 fun MealsSingleCategoryScreen(categoryName: String?, navHostController: NavHostController?) {
@@ -31,19 +33,22 @@ fun MealsSingleCategoryScreen(categoryName: String?, navHostController: NavHostC
     viewModel.setString(categoryName!!)
     LazyColumn {
         items(meals) { meal ->
-            MealsScreen(meal)
+            MealsScreen(meal){
+                navHostController!!.navigate(RECIPE_LIST+meal.description)
+            }
         }
     }
 }
 
 @Composable
-fun MealsScreen(meal: MealsSingleResponse) {
+fun MealsScreen(meal: MealsSingleResponse,clickAction: ()-> Unit) {
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = 2.dp,
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
+            .clickable (onClick = clickAction)
 
     ) {
         Row(
