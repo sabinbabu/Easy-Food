@@ -1,14 +1,17 @@
 package com.binwin.easyfood.model.api
 
+import com.binwin.easyfood.model.response.MealSingleCategoryResponse
 import com.binwin.easyfood.model.response.MealsCategoryResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 class MealsService {
     //retrofit implementation
-    lateinit var api : MealsApi
+    var api : MealsApi
 
     init{   //initializing Retrofit instance
         val retrofit = Retrofit.Builder()
@@ -25,9 +28,15 @@ class MealsService {
         return api.getMeals()
     }
 
+    suspend fun getCategoryMeals(categoryName:String) : MealSingleCategoryResponse{
+        return api.getCategoryMeals(categoryName)
+    }
+
     //retrofit implementation
     interface MealsApi{
         @GET("categories.php")
         suspend fun getMeals(): MealsCategoryResponse //meal end point to get meal
+        @GET("filter.php")
+        suspend fun getCategoryMeals(@Query("c") categoryName : String) : MealSingleCategoryResponse
     }
 }

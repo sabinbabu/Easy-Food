@@ -12,16 +12,14 @@ import kotlinx.coroutines.launch
 class MealsCategoryViewModel(
     private val repository: MealsRepository = MealsRepository()
 ): ViewModel() {
+    val mealsState : MutableState<List<MealResponse>> =  mutableStateOf(emptyList())
 
     init {
-
         viewModelScope.launch(Dispatchers.IO) {
             val meals = getMeals()
             mealsState.value = meals
         }
     }
-
-    val mealsState : MutableState<List<MealResponse>> =  mutableStateOf(emptyList())
 
 
     private suspend fun getMeals() : List<MealResponse>{

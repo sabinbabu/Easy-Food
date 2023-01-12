@@ -19,23 +19,27 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.binwin.easyfood.model.response.MealResponse
+import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
 
 @Composable
-fun MealsCategoryScreen() {
+fun MealsCategoryScreen(navHostController: NavHostController?) {
     val viewModel: MealsCategoryViewModel = viewModel()
     val meals = viewModel.mealsState.value
     //lets things inside launched effect called only once
-    LazyColumn() {
+    LazyColumn {
         items(meals) { meal ->
-            MealCategory(meal)
+            MealCategory(meal){
+                navHostController!!.navigate(MEALS_SINGLE_CATEGORY+meal.name)
+            }
         }
     }
 }
 
 @Composable
-fun MealCategory(meal: MealResponse) {
+fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
     var isExpandable by remember { mutableStateOf(false) }
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -43,6 +47,7 @@ fun MealCategory(meal: MealResponse) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
+            .clickable (onClick = clickAction)
 
     ) {
         Row(
@@ -85,8 +90,9 @@ fun MealCategory(meal: MealResponse) {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
-fun DefaultPreview() {
-    MealsCategoryScreen()
+fun MealsCategoryPreview() {
+    MealsCategoryScreen(null)
 }
