@@ -11,15 +11,16 @@ import retrofit2.http.Query
 
 class MealsService {
     //retrofit implementation
-    var api : MealsApi
+    var api: MealsApi
 
-    init{   //initializing Retrofit instance
+    init {   //initializing Retrofit instance
         val retrofit = Retrofit.Builder()
             .baseUrl("https://www.themealdb.com/api/json/v1/1/")//base URL
             .addConverterFactory(GsonConverterFactory.create()) //converts json to Gson
             .build()
 
-        api = retrofit.create(MealsApi::class.java) // passing interface to retrofit; // so that actual request can be done ; we want to get meals
+        api =
+            retrofit.create(MealsApi::class.java) // passing interface to retrofit; // so that actual request can be done ; we want to get meals
 
     }
 
@@ -28,15 +29,16 @@ class MealsService {
         return api.getMeals()
     }
 
-    suspend fun getCategoryMeals(categoryName:String) : MealSingleCategoryResponse{
+    suspend fun getCategoryMeals(categoryName: String): MealSingleCategoryResponse {
         return api.getCategoryMeals(categoryName)
     }
 
     //retrofit implementation
-    interface MealsApi{
+    interface MealsApi {
         @GET("categories.php")
         suspend fun getMeals(): MealsCategoryResponse //meal end point to get meal
+
         @GET("filter.php")
-        suspend fun getCategoryMeals(@Query("c") categoryName : String) : MealSingleCategoryResponse
+        suspend fun getCategoryMeals(@Query("c") categoryName: String): MealSingleCategoryResponse
     }
 }

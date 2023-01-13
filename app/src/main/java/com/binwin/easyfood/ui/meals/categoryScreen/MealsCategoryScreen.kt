@@ -1,11 +1,10 @@
-package com.binwin.easyfood.ui.meals
+package com.binwin.easyfood.ui.meals.categoryScreen
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,26 +19,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
 import com.binwin.easyfood.model.response.MealResponse
+import com.binwin.easyfood.ui.theme.EASY_FOOD
 import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
+import com.binwin.easyfood.ui.util.AppBar
 
 @Composable
 fun MealsCategoryScreen(navHostController: NavHostController?) {
     val viewModel: MealsCategoryViewModel = viewModel()
     val meals = viewModel.mealsState.value
     //lets things inside launched effect called only once
-    LazyColumn {
-        items(meals) { meal ->
-            MealCategory(meal){
-                navHostController!!.navigate(MEALS_SINGLE_CATEGORY+meal.name)
+
+    Scaffold(topBar = { AppBar(icon = null, title = EASY_FOOD) {} }) {
+        LazyColumn {
+            items(meals) { meal ->
+                MealCategory(meal) {
+                    navHostController!!.navigate(MEALS_SINGLE_CATEGORY + meal.name)
+                }
             }
         }
     }
 }
 
 @Composable
-fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
+fun MealCategory(meal: MealResponse, clickAction: () -> Unit) {
     var isExpandable by remember { mutableStateOf(false) }
     Card(
         shape = RoundedCornerShape(8.dp),
@@ -47,7 +50,7 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
-            .clickable (onClick = clickAction)
+            .clickable(onClick = clickAction)
 
     ) {
         Row(
@@ -55,14 +58,14 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
             modifier = Modifier.animateContentSize()
         ) {
             Surface(
-                modifier = Modifier
+                modifier = androidx.compose.ui.Modifier
                     .padding(5.dp)
                     .size(88.dp)
             ) {
-                AsyncImage(
+                coil.compose.AsyncImage(
                     model = meal.image,
                     contentDescription = null,
-                    modifier = Modifier.clip(CircleShape)
+                    modifier = Modifier.clip(androidx.compose.foundation.shape.CircleShape)
                 )
             }
             Column(
@@ -70,7 +73,10 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
                     .padding(8.dp)
                     .fillMaxWidth(0.8f)
             ) {
-                Text(text = meal.name, style = MaterialTheme.typography.h6)
+                Text(
+                    text = meal.name,
+                    style = MaterialTheme.typography.h6
+                )
                 CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
                     Text(
                         text = meal.description,
@@ -88,6 +94,7 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit ) {
             )
         }
     }
+
 }
 
 

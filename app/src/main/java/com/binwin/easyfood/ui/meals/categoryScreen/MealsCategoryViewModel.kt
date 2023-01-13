@@ -1,4 +1,4 @@
-package com.binwin.easyfood.ui.meals
+package com.binwin.easyfood.ui.meals.categoryScreen
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -11,8 +11,8 @@ import kotlinx.coroutines.launch
 
 class MealsCategoryViewModel(
     private val repository: MealsRepository = MealsRepository()
-): ViewModel() {
-    val mealsState : MutableState<List<MealResponse>> =  mutableStateOf(emptyList())
+) : ViewModel() {
+    val mealsState: MutableState<List<MealResponse>> = mutableStateOf(emptyList())
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
@@ -22,7 +22,7 @@ class MealsCategoryViewModel(
     }
 
 
-    private suspend fun getMeals() : List<MealResponse>{
+    private suspend fun getMeals(): List<MealResponse> {
         return repository.getMeals().categories
     }
 }

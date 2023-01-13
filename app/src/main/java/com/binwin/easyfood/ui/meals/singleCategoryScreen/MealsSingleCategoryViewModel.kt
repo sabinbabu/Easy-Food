@@ -1,13 +1,10 @@
-package com.binwin.easyfood.ui.meals
+package com.binwin.easyfood.ui.meals.singleCategoryScreen
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.binwin.easyfood.model.MealsRepository
-import com.binwin.easyfood.model.response.MealResponse
 import com.binwin.easyfood.model.response.MealsSingleResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

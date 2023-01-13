@@ -2,8 +2,8 @@ package com.binwin.easyfood.model.response
 
 import com.google.gson.annotations.SerializedName
 
-data class MealsCategoryResponse (
-    val categories : List<MealResponse>
+data class MealsCategoryResponse(
+    val categories: List<MealResponse>
 )
 
 data class MealResponse(
