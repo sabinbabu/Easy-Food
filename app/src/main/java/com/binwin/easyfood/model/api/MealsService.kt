@@ -2,6 +2,7 @@ package com.binwin.easyfood.model.api
 
 import com.binwin.easyfood.model.response.MealSingleCategoryResponse
 import com.binwin.easyfood.model.response.MealsCategoryResponse
+import com.binwin.easyfood.model.response.RecipeResponse
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -33,6 +34,10 @@ class MealsService {
         return api.getCategoryMeals(categoryName)
     }
 
+    suspend fun getRecipe(recipeName: String) : RecipeResponse{
+        return api.getRecipe(recipeName)
+    }
+
     //retrofit implementation
     interface MealsApi {
         @GET("categories.php")
@@ -40,5 +45,8 @@ class MealsService {
 
         @GET("filter.php")
         suspend fun getCategoryMeals(@Query("c") categoryName: String): MealSingleCategoryResponse
+
+        @GET("search.php")
+        suspend fun getRecipe(@Query("s") recipeName: String): RecipeResponse
     }
 }

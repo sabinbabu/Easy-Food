@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.binwin.easyfood.ui.meals.categoryScreen.MealsCategoryScreen
+import com.binwin.easyfood.ui.meals.recipeScreen.RecipeScreen
 import com.binwin.easyfood.ui.meals.singleCategoryScreen.MealsSingleCategoryScreen
 import com.binwin.easyfood.ui.theme.MEALS_CATEGORY
 import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY

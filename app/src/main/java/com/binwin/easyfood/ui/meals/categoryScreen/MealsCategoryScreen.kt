@@ -1,6 +1,7 @@
 package com.binwin.easyfood.ui.meals.categoryScreen
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -19,7 +20,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
 import com.binwin.easyfood.model.response.MealResponse
+import com.binwin.easyfood.ui.theme.Background
 import com.binwin.easyfood.ui.theme.EASY_FOOD
 import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
 import com.binwin.easyfood.ui.util.AppBar
@@ -62,7 +65,7 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit) {
                     .padding(5.dp)
                     .size(88.dp)
             ) {
-                coil.compose.AsyncImage(
+                AsyncImage(
                     model = meal.image,
                     contentDescription = null,
                     modifier = Modifier.clip(androidx.compose.foundation.shape.CircleShape)

@@ -87,7 +87,7 @@ fun MealsScreen(meal: MealsSingleResponse, clickAction: () -> Unit) {
     }
 }
 
-@Preview(showBackground = true)
+
 @Composable
 fun MealsSingleCategoryPreview() {
     MealsSingleCategoryScreen(null, null)
