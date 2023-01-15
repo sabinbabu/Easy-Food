@@ -37,7 +37,7 @@ fun MealsCategoryScreen(navHostController: NavHostController?) {
         ){
             Column() {
                 Text(
-                    text = MEALS_CATEGORY,
+                    text = "Meals Category",
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(15.dp),
                     color = TitleColour,
