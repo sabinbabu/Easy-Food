@@ -43,20 +43,23 @@ fun MealsSingleCategoryScreen(
             title = categoryName
         ) { navHostController?.navigateUp() }
     }) {
-
-
-        Column(modifier = Modifier.background(Background)) {
-            Text(
-                text = "Meals",
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(15.dp),
-                color = TitleColour,
-                style = MaterialTheme.typography.h5
-            )
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                items(meals.size) { it ->
-                    MealsScreen(meals[it]) {
-                        navHostController!!.navigate(RECIPE_LIST + meals[it].description)
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Background
+        ) {
+            Column(modifier = Modifier.background(Background)) {
+                Text(
+                    text = "Meals",
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(15.dp),
+                    color = TitleColour,
+                    style = MaterialTheme.typography.h5
+                )
+                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                    items(meals.size) { it ->
+                        MealsScreen(meals[it]) {
+                            navHostController!!.navigate(RECIPE_LIST + meals[it].description)
+                        }
                     }
                 }
             }

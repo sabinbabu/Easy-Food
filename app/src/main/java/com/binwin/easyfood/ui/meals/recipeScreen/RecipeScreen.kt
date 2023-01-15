@@ -41,7 +41,6 @@ fun RecipeScreen(
             title = null
         ) { navHostController!!.navigateUp() }
     }) {
-
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = Background

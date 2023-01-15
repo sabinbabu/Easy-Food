@@ -3,10 +3,7 @@ package com.binwin.easyfood.ui.meals.categoryScreen
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,18 +32,23 @@ fun MealsCategoryScreen(navHostController: NavHostController?) {
 
     Scaffold(topBar = { AppBar(icon = null, title = EASY_FOOD) {} }) {
 
-        Column(modifier = Modifier.background(Background)) {
-            Text(
-                text = "Meal Category",
-                fontWeight = FontWeight.Bold,
-                modifier = Modifier.padding(15.dp),
-                color = TitleColour,
-                style = MaterialTheme.typography.h5
-            )
-            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                items(meals.size) { it ->
-                    MealCategory(meals[it]) {
-                        navHostController!!.navigate(MEALS_SINGLE_CATEGORY + meals[it].name)
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = Background
+        ){
+            Column() {
+                Text(
+                    text = "Meal Category",
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(15.dp),
+                    color = TitleColour,
+                    style = MaterialTheme.typography.h5
+                )
+                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                    items(meals.size) { it ->
+                        MealCategory(meals[it]) {
+                            navHostController!!.navigate(MEALS_SINGLE_CATEGORY + meals[it].name)
+                        }
                     }
                 }
             }
