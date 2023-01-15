@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -83,7 +84,9 @@ fun MealsScreen(meal: MealsSingleResponse, clickAction: () -> Unit) {
             Text(
                 text = meal.description,
                 style = MaterialTheme.typography.h6,
-                modifier = Modifier.padding(15.dp)
+                modifier = Modifier.padding(15.dp),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis
             )
             Surface(
                 modifier = androidx.compose.ui.Modifier
