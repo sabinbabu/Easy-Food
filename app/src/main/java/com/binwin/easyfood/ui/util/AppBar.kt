@@ -5,10 +5,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
+import com.binwin.easyfood.ui.theme.Background
+import com.binwin.easyfood.ui.theme.TitleColour
 
 @Composable
 fun AppBar(icon: ImageVector?, title: String, onClickBack: () -> Unit) {
@@ -24,7 +27,9 @@ fun AppBar(icon: ImageVector?, title: String, onClickBack: () -> Unit) {
                 )
             }
         },
-        title = { Text(text = title) }
+        title = { Text(text = title) },
+        contentColor = TitleColour,
+        elevation = 0.dp
     )
 }
 

@@ -5,6 +5,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -15,6 +17,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,6 +29,7 @@ import com.binwin.easyfood.model.response.MealResponse
 import com.binwin.easyfood.ui.theme.Background
 import com.binwin.easyfood.ui.theme.EASY_FOOD
 import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
+import com.binwin.easyfood.ui.theme.TitleColour
 import com.binwin.easyfood.ui.util.AppBar
 
 @Composable
@@ -34,10 +39,20 @@ fun MealsCategoryScreen(navHostController: NavHostController?) {
     //lets things inside launched effect called only once
 
     Scaffold(topBar = { AppBar(icon = null, title = EASY_FOOD) {} }) {
-        LazyColumn {
-            items(meals) { meal ->
-                MealCategory(meal) {
-                    navHostController!!.navigate(MEALS_SINGLE_CATEGORY + meal.name)
+
+        Column(modifier = Modifier.background(Background)) {
+            Text(
+                text = "Meal Category",
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(15.dp),
+                color = TitleColour,
+                style = MaterialTheme.typography.h5
+            )
+            LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                items(meals.size) { meal ->
+                    MealCategory(meals[meal]) {
+                        navHostController!!.navigate(MEALS_SINGLE_CATEGORY + meals[meal].name)
+                    }
                 }
             }
         }
@@ -46,24 +61,26 @@ fun MealsCategoryScreen(navHostController: NavHostController?) {
 
 @Composable
 fun MealCategory(meal: MealResponse, clickAction: () -> Unit) {
-    var isExpandable by remember { mutableStateOf(false) }
     Card(
         shape = RoundedCornerShape(8.dp),
         elevation = 2.dp,
         modifier = Modifier
-            .fillMaxWidth()
+            .height(250.dp)
             .padding(top = 8.dp, bottom = 8.dp, start = 8.dp, end = 8.dp)
             .clickable(onClick = clickAction)
 
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.animateContentSize()
+        Column(
         ) {
+            Text(
+                text = meal.name,
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.padding(15.dp)
+            )
             Surface(
                 modifier = androidx.compose.ui.Modifier
                     .padding(5.dp)
-                    .size(88.dp)
+                    .size(250.dp)
             ) {
                 AsyncImage(
                     model = meal.image,
@@ -71,33 +88,8 @@ fun MealCategory(meal: MealResponse, clickAction: () -> Unit) {
                     modifier = Modifier.clip(androidx.compose.foundation.shape.CircleShape)
                 )
             }
-            Column(
-                modifier = Modifier
-                    .padding(8.dp)
-                    .fillMaxWidth(0.8f)
-            ) {
-                Text(
-                    text = meal.name,
-                    style = MaterialTheme.typography.h6
-                )
-                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
-                    Text(
-                        text = meal.description,
-                        maxLines = if (!isExpandable) 2 else 10,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                }
-            }
-            Icon(
-                imageVector = if (!isExpandable) Icons.Filled.KeyboardArrowDown else Icons.Filled.KeyboardArrowUp,
-                contentDescription = "minimize content",
-                modifier = Modifier.clickable {
-                    isExpandable = !isExpandable
-                }
-            )
         }
     }
-
 }
 
 
