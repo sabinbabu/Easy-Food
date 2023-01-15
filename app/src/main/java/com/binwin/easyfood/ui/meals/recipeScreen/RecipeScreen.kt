@@ -24,16 +24,16 @@ import com.binwin.easyfood.model.response.Recipe
 import com.binwin.easyfood.ui.theme.Background
 import com.binwin.easyfood.ui.theme.TitleColour
 import com.binwin.easyfood.ui.util.AppBar
+import com.binwin.easyfood.ui.util.ViewModelFactory
 
 @Composable
 fun RecipeScreen(
     mealName: String?,
     navHostController: NavHostController?,
-    viewModel: RecipeScreenViewModel = viewModel()
+    viewModel: RecipeScreenViewModel = viewModel(factory = ViewModelFactory(null,mealName!!))
 ) {
 
     val recipe = viewModel.recipeState.value
-    viewModel.setString(mealName!!)
 
     Scaffold(topBar = {
         AppBar(

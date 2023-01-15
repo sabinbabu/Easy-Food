@@ -11,17 +11,16 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.binwin.easyfood.R
 import com.binwin.easyfood.model.response.MealResponse
-import com.binwin.easyfood.ui.theme.Background
-import com.binwin.easyfood.ui.theme.EASY_FOOD
-import com.binwin.easyfood.ui.theme.MEALS_SINGLE_CATEGORY
-import com.binwin.easyfood.ui.theme.TitleColour
+import com.binwin.easyfood.ui.theme.*
 import com.binwin.easyfood.ui.util.AppBar
 
 @Composable
@@ -38,7 +37,7 @@ fun MealsCategoryScreen(navHostController: NavHostController?) {
         ){
             Column() {
                 Text(
-                    text = "Meal Category",
+                    text = MEALS_CATEGORY,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(15.dp),
                     color = TitleColour,

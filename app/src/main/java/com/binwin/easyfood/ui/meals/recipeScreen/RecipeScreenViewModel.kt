@@ -9,18 +9,16 @@ import com.binwin.easyfood.model.response.Recipe
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeScreenViewModel(private val repository: MealsRepository = MealsRepository()) : ViewModel() {
+class RecipeScreenViewModel(
+    private val recipe : String,
+    private val repository: MealsRepository = MealsRepository()
+) : ViewModel() {
 
      var recipeState : MutableState<List<Recipe>> = mutableStateOf(emptyList())
 
-    private lateinit var recipeName: String
-    fun setString(name: String) {
-        recipeName = name
-    }
-
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val recipe = getRecipe(recipeName)
+            val recipe = getRecipe(recipe)
             recipeState.value = recipe
         }
     }

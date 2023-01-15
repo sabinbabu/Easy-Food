@@ -28,15 +28,14 @@ import com.binwin.easyfood.model.response.MealsSingleResponse
 import com.binwin.easyfood.ui.meals.categoryScreen.MealCategory
 import com.binwin.easyfood.ui.theme.*
 import com.binwin.easyfood.ui.util.AppBar
+import com.binwin.easyfood.ui.util.ViewModelFactory
 
 @Composable
 fun MealsSingleCategoryScreen(
     categoryName: String?, navHostController: NavHostController?
 ) {
-    val viewModel: MealsSingleCategoryViewModel = viewModel()
+    val viewModel: MealsSingleCategoryViewModel = viewModel(factory = ViewModelFactory(categoryName!!,null))
     val meals = viewModel.mealsState.value
-
-    viewModel.setString(categoryName!!)
 
     Scaffold(topBar = {
         AppBar(

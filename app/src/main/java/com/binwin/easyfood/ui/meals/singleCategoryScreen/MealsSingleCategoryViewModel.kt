@@ -10,18 +10,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MealsSingleCategoryViewModel(
+    private val name : String,
     private val repository: MealsRepository = MealsRepository()
 ) : ViewModel() {
     val mealsState: MutableState<List<MealsSingleResponse>> = mutableStateOf(emptyList())
-    private lateinit var categoryName: String
-
-    fun setString(name: String) {
-        categoryName = name
-    }
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val meals = getSingleCategoryMeals(categoryName)
+            val meals = getSingleCategoryMeals(name)
             mealsState.value = meals
         }
     }

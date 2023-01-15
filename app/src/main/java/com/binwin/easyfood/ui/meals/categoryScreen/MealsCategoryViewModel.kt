@@ -11,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MealsCategoryViewModel(
+
     private val repository: MealsRepository = MealsRepository()
 ) : ViewModel() {
     val mealsState: MutableState<List<MealResponse>> = mutableStateOf(emptyList())
