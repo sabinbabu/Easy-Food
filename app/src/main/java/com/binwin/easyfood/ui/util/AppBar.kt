@@ -14,7 +14,7 @@ import com.binwin.easyfood.ui.theme.Background
 import com.binwin.easyfood.ui.theme.TitleColour
 
 @Composable
-fun AppBar(icon: ImageVector?, title: String, onClickBack: () -> Unit) {
+fun AppBar(icon: ImageVector?, title: String?, onClickBack: () -> Unit) {
     TopAppBar(
         navigationIcon = if (icon == null) null else {
             {
@@ -27,7 +27,11 @@ fun AppBar(icon: ImageVector?, title: String, onClickBack: () -> Unit) {
                 )
             }
         },
-        title = { Text(text = title) },
+        title = {
+            if (title != null) {
+                Text(text = title)
+            } else null
+        },
         contentColor = TitleColour,
         elevation = 0.dp
     )
